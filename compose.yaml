@@ -1,0 +1,74 @@
+name: news_compiler
+
+services:  # Define services/containers to spin up
+    frontend:
+        container_name: react_nginx
+        build: # Specifies build configuration
+            context: ./frontend  # Location of Dockerfile
+        environment:
+            NODE_ENV: production
+        ports: # Mappings between host and container — host:container
+            - "3000:80"
+        networks:
+            - network
+        depends_on: # Used for build order
+            - backend-rest
+
+    backend-scraper:
+        container_name: "scraper_backend"
+        build:
+            context: ./scraper
+        networks:
+            - network
+        depends_on:
+            backend-rest:
+                condition: service_healthy  # Ensure health check passes
+
+    backend-rest:
+        container_name: "spring_backend"
+        build:
+            context: ./backend
+        environment:
+            # Variables to configure MySQL connection
+            - "SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/${MYSQL_DATABASE}"
+            - "SPRING_DATASOURCE_USERNAME=root"
+            - "SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+        ports:  # Expose API to host's port 8080
+            - "8080:8080"
+        expose:  # Expose port 8080 to other services
+            -   "8080"
+        healthcheck:
+            # Exit code 0 shows that the container is healthy and depends_on can proceed
+            test: "curl -f http://localhost:8080/api/health/ping || exit 1"
+            interval: 1m
+            retries: 3
+            start_period: 20s
+            start_interval: 5s
+        networks:
+            - network
+        depends_on:
+            database:
+                condition: service_healthy
+
+    database:
+        container_name: "mysql_database"
+        image: "mysql:latest"
+        environment:
+            # Variables to setup MySQL
+            - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+            - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+            - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+            - "MYSQL_USER=${MYSQL_USER}"
+        ports:
+            - "3306:3306"
+        healthcheck:
+            test: "mysqladmin ping -h localhost || exit 1"
+            interval: 1m
+            retries: 5
+            start_period: 10s
+            start_interval: 500ms
+        networks:
+            - network
+
+networks:
+    network:

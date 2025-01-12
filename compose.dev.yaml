@@ -1,0 +1,16 @@
+name: news_compiler
+
+services:
+    frontend:
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+        command: npm run dev
+
+    backend-scraper:
+        volumes:
+            - ./scraper:/app
+
+    backend-rest:
+        volumes:
+            - ./backend:/app.

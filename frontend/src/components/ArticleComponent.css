@@ -1,0 +1,43 @@
+body {
+    background-color: #353535;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2vh 10vw 5vh;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+hr {
+    float: left;
+    width: 100%;
+}
+
+.container {
+    width: min(725px, 100%);
+    margin: 0 auto;
+}
+
+#meta {
+    font-style: italic;
+}
+
+#title {
+    text-align: center;
+    margin-bottom: 0.5em;
+
+    cursor: grab;
+}
+
+.articleBody {
+    font-size: 1.1em;
+    margin: 18px 0;
+}
