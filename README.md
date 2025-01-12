@@ -16,9 +16,9 @@ compiling them into one cohesive location with each article one click away.
 ## How to Deploy Yourself 🚀
 1. Install [Docker Compose](https://docs.docker.com/compose/install/)
 2. Clone the [repository](https://github.com/KorayL/News-Compiler-Web.git)
-3. Make a copy of the `.env.example` file and rename it to `.env`
+3. Make a copy of the `.env.template` file and rename it to `.env`
 4. Fill in the `.env` file with your own values
-5. Run `docker-compose up` in the root directory of the project
+5. Run `docker compose up` in the root directory of the project
 6. Visit `localhost:3000` in your browser
 7. Enjoy!
 
