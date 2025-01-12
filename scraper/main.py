@@ -77,12 +77,6 @@ def main():
     print("sending articles to backend")
     response = requests.post("http://backend-rest:8080/api/articles", json=article_list)
     print(response.status_code)
-    print(json.dumps(response.json(), indent=4))
 
 if __name__ == '__main__':
     main()
-
-    # TODO: delete
-    # response: Response = requests.get("http://backend-rest:8080/api/articles/recent")
-    # for article in response.json():
-    #     print(json.dumps(article, indent=4))
