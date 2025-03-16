@@ -17,7 +17,7 @@ import axios from 'axios';
  *     title: String,
  * }[], status: Number}>>}
  */
-export const getRecentArticles = () => axios.get('http://localhost:8080/api/articles/recent');
+export const getRecentArticles = () => axios.get('/api/articles/recent');
 
 /**
  * Retrieves an article by its ID.
@@ -34,4 +34,4 @@ export const getRecentArticles = () => axios.get('http://localhost:8080/api/arti
  *     title: String,
  * }, status: Number}}
  */
-export const getArticleById = (id) => axios.get(`http://localhost:8080/api/articles/${id}`);
+export const getArticleById = (id) => axios.get(`/api/articles/${id}`);
