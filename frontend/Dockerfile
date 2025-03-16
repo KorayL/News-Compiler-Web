@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Use Nginx as the production server
-FROM nginx:alpine
+FROM nginx:latest
 
 # Copy the built React app to Nginx container's app directory
 RUN mkdir -p /app
