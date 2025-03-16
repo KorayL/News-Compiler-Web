@@ -84,6 +84,7 @@ const MosaicComponent = () => {
                 })
                 setArticleHTMLs(htmls)
             } else {
+                console.log(response.data)
                 setError("Error: Data is not an array.")
             }
         }).catch((error) => {  // Catch any errors fetching
