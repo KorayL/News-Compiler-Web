@@ -19,14 +19,22 @@ RUN npm run build
 # Use Nginx as the production server
 FROM nginx:latest
 
+ARG DOMAIN
+ARG EMAIL
+
 # Copy the built React app to Nginx container's app directory
 RUN mkdir -p /app
 COPY --from=build /app/dist /app
 
-# Update Nginx config to use react router
-RUN sed -i '/location \/ {/a \        try_files \$uri /index.html;' /etc/nginx/conf.d/default.conf
-# Update Nginx config to user /app 
-RUN sed -i 's/\/usr\/share\/nginx\/html/\/app/' /etc/nginx/conf.d/default.conf
+# Create SSL certificates
+RUN apt update && apt install -y certbot python3-certbot-nginx
+RUN certbot --nginx -d ${DOMAIN} --non-interactive --agree-tos --email ${EMAIL}
+
+# Add cron job for renewing SSL certificates
+RUN echo "0 3 * * * certbot renew --quiet --post-hook 'nginx -s reload'" > /etc/cron.d/certbot
+
+# Copy the Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 for the Nginx server
 EXPOSE 80

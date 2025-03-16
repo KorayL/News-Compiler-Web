@@ -5,6 +5,11 @@ services:  # Define services/containers to spin up
         container_name: react_nginx
         build: # Specifies build configuration
             context: ./frontend  # Location of Dockerfile
+            args: # Arguments to pass to the build
+                - DOMAIN=${DOMAIN}
+                - EMAIL=${EMAIL}
+        env_file:
+            - ".env"
         environment:
             NODE_ENV: production
         ports: # Mappings between host and container — host:container
@@ -18,6 +23,8 @@ services:  # Define services/containers to spin up
         container_name: "scraper_backend"
         build:
             context: ./scraper
+        env_file:
+            - ".env"
         networks:
             - network
         depends_on:
@@ -28,6 +35,8 @@ services:  # Define services/containers to spin up
         container_name: "spring_backend"
         build:
             context: ./backend
+        env_file:
+            - ".env"
         environment:
             # Variables to configure MySQL connection
             - "SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/${MYSQL_DATABASE}"
@@ -53,12 +62,8 @@ services:  # Define services/containers to spin up
     database:
         container_name: "mysql_database"
         image: "mysql:latest"
-        environment:
-            # Variables to setup MySQL
-            - "MYSQL_DATABASE=${MYSQL_DATABASE}"
-            - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
-            - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
-            - "MYSQL_USER=${MYSQL_USER}"
+        env_file:
+            - ".env"
         ports:
             - "3306:3306"
         healthcheck:
