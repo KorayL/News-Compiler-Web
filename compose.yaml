@@ -3,6 +3,8 @@ name: news_compiler
 services:  # Define services/containers to spin up
     frontend:
         container_name: react_nginx
+        volumes:
+            -   ./frontend/certificates:/etc/
         build: # Specifies build configuration
             context: ./frontend  # Location of Dockerfile
             args: # Arguments to pass to the build
