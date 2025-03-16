@@ -16,6 +16,7 @@ services:  # Define services/containers to spin up
             NODE_ENV: production
         ports: # Mappings between host and container — host:container
             - "80:80"
+            - "443:443"
         networks:
             - network
         depends_on: # Used for build order
