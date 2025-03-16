@@ -64,29 +64,24 @@ const MosaicComponent = () => {
     useEffect(() => {
         // Fetch articles on render
         getRecentArticles().then((response) => {
-            if (Array.isArray(response.data)) {
-                // Convert article data to HTML
-                let htmls = []
-                response.data.forEach((article) => {
-                    htmls.push(
-                        // Construct an article div
-                        <div className="article" key={article.id}
-                             onClick={() => openArticle(article.id)}>
+            // Convert article data to HTML
+            let htmls = []
+            response.data.forEach((article) => {
+                htmls.push(
+                    // Construct an article div
+                    <div className="article" key={article.id}
+                         onClick={() => openArticle(article.id)}>
 
-                            <h4 className="tileTitle" id={article.title}>{article.title}</h4>
-                            {/*Only include the image if it exists*/}
-                            {article.imageUrl && <img src={article.imageUrl}></img>}
+                        <h4 className="tileTitle" id={article.title}>{article.title}</h4>
+                        {/*Only include the image if it exists*/}
+                        {article.imageUrl && <img src={article.imageUrl}></img>}
 
-                            {/*Show where the article was scraped from*/}
-                            <p> {article.source} </p>
-                        </div>
-                    )
-                })
-                setArticleHTMLs(htmls)
-            } else {
-                console.log(response.data)
-                setError("Error: Data is not an array.")
-            }
+                        {/*Show where the article was scraped from*/}
+                        <p> {article.source} </p>
+                    </div>
+                )
+            })
+            setArticleHTMLs(htmls)
         }).catch((error) => {  // Catch any errors fetching
             setError("Error fetching articles.")
             console.error(error)
