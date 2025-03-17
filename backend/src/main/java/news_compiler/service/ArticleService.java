@@ -64,7 +64,10 @@ public class ArticleService {
 
         // Sort articles by time published, keeping null times at the end
         mutableArticles.sort((a1, a2) -> {
-            if (a1.getTimePublished() == null) {
+            if (a1.getTimePublished() == null && a2.getTimePublished() == null) {
+                // Compare based on time fetched
+                return a2.getTimeFetched().compareTo(a1.getTimeFetched());
+            } else if (a1.getTimePublished() == null) {
                 return 1;
             } else if (a2.getTimePublished() == null) {
                 return -1;
