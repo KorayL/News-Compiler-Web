@@ -35,18 +35,18 @@ compiling them into one cohesive location with each article one click away.
 ### If you want to host globally:
 1. Follow the steps above first.
 2. Forward ports 80 and 443 (TCP) on your router to the host machine.
-3. Ensure the application is running with the `docker compose up` command.
-4. Enter into the container from another terminal window with `docker exec -it react_nginx sh`.
-5. Run `certbot --nginx -d ${DOMAIN} --non-interactive --agree-tos --email ${EMAIL}`.
-6. Change the nginx configuration (in `react_nginx`) in `/etc/nginx/conf.d/default.conf` to use
+3. Purchase a domain name and add an A DNS record pointing to your public IP address as well as a 
+   CNAME DNS record pointing to `www` and your domain name.
+4. Ensure the application is running with the `docker compose up` command.
+5. Enter into the container from another terminal window with `docker exec -it react_nginx sh`.
+6. Run `certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email 
+   ${EMAIL}`.
+7. Change the nginx configuration (in `react_nginx`) in `/etc/nginx/conf.d/default.conf` to use
    the new certificates using the following two lines with `vim` or `nano`.
-   Make sure to change `example.com` to your own domain name.
-   ```
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-   ```
-7. Exit the container with `exit`.
-8. Restart the nginx container with `docker compose restart frontend`. </br>
+   The required lines are already in the file, but commented out.
+   Comment them in and uncomment the two lines above them.
+8. Exit the container with `exit`.
+9. Restart the nginx container with `docker compose restart frontend`. </br>
    If you messed up the configuration, the container will not start. Please follow these steps 
    to correct it:
    1. Copy the default.conf file to the current directory: `docker cp react_nginx:/etc/nginx/conf.d/default.conf .`
@@ -54,8 +54,8 @@ compiling them into one cohesive location with each article one click away.
    3. Copy the file back to the container and delete the copy we just made: `docker cp default.conf 
    react_nginx:/etc/nginx/conf.d/default.conf && rm default.conf`.
    4. Restart the nginx container with `docker compose restart frontend`.
-9. Enjoy!
-10. Use `docker compose stop` and `docker-compose start` to stop and start the server
+10. Enjoy!
+11. Use `docker compose stop` and `docker-compose start` to stop and start the server
     respectively.
 
 ---
