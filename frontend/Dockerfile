@@ -17,19 +17,26 @@ COPY . .
 RUN npm run build
 
 # Use Nginx as the production server
-FROM nginx:alpine
+FROM nginx:latest
+
+ARG DOMAIN
+ARG EMAIL
 
 # Copy the built React app to Nginx container's app directory
 RUN mkdir -p /app
 COPY --from=build /app/dist /app
 
-# Update Nginx config to use react router
-RUN sed -i '/location \/ {/a \        try_files \$uri /index.html;' /etc/nginx/conf.d/default.conf
-# Update Nginx config to user /app 
-RUN sed -i 's/\/usr\/share\/nginx\/html/\/app/' /etc/nginx/conf.d/default.conf
+# Install dependancies for creating certbot certificates
+RUN apt update && apt install -y certbot python3-certbot-nginx vim nano
 
-# Expose port 80 for the Nginx server
-EXPOSE 80
+# Copy the Nginx configuration file
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+# Replace `example.com` with the actual domain in the Nginx config
+RUN sed -i "s/example.com/${DOMAIN}/g" /etc/nginx/conf.d/default.conf
+
+# Expose port HTTP and HTTPS poorts for Nginx
+EXPOSE 80 443
 
 # Start Nginx when the container runs
 CMD ["nginx", "-g", "daemon off;"]

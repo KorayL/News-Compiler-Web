@@ -81,7 +81,6 @@ const MosaicComponent = () => {
                     </div>
                 )
             })
-
             setArticleHTMLs(htmls)
         }).catch((error) => {  // Catch any errors fetching
             setError("Error fetching articles.")
