@@ -13,6 +13,18 @@ compiling them into one cohesive location with each article one click away.
 
 ---
 
+
+## Screenshots 📸
+
+![Whole Compiler Image](assets/mosaicImage.png)
+
+---
+
+![Article Image](assets/articleImage.png)
+
+
+---
+
 ## How to Deploy Yourself 🚀
 1. Install [Docker Compose](https://docs.docker.com/compose/install/)
 2. Clone the [repository](https://github.com/KorayL/News-Compiler-Web.git)
@@ -57,13 +69,3 @@ compiling them into one cohesive location with each article one click away.
 10. Enjoy!
 11. Use `docker compose stop` and `docker-compose start` to stop and start the server
     respectively.
-
----
-
-## Screenshots 📸
-
-![Whole Compiler Image](assets/mosaicImage.png)
-
----
-
-![Article Image](assets/articleImage.png)
