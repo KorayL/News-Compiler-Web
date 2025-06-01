@@ -64,6 +64,7 @@ const MosaicComponent = () => {
     useEffect(() => {
         // Fetch articles on render
         getRecentArticles().then((response) => {
+            console.log(response)
             // Convert article data to HTML
             let htmls = []
             response.data.forEach((article) => {
