@@ -14,6 +14,7 @@ services:  # Define services/containers to spin up
             - ".env"
         environment:
             NODE_ENV: production
+            VITE_REFRESH: false  # Disable hot reloading in production
         ports: # Mappings between host and container — host:container
             - "80:80"
             - "443:443"

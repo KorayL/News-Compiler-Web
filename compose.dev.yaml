@@ -1,16 +1,85 @@
-name: news_compiler
+name: news_compiler_dev
 
 services:
     frontend:
+        container_name: "react_nginx_dev"
         volumes:
             - ./frontend:/app
-            - /app/node_modules
-        command: npm run dev
+            - /app/node_modules # Prevents overriding
+        build: # Specifies build configuration
+            context: ./frontend # Location of Dockerfile
+            dockerfile: Dockerfile.dev # Name of the Dockerfile
+            args: # Arguments to pass to the build
+                - DOMAIN=${DOMAIN}
+                - EMAIL=${EMAIL}
+        environment:
+            VITE_REFRESH: true  # Enable hot reloading
+        env_file:
+            - ".env"
+        ports: # Mappings between host and container — host:container
+            - "5173:5173"  # Expose React app on port 5173
+        networks:
+            - network
 
     backend-scraper:
+        container_name: "scraper_backend_dev"
         volumes:
             - ./scraper:/app
+        build:
+            context: ./scraper
+        env_file:
+            - ".env"
+        networks:
+            - network
+        depends_on:
+            backend-rest:
+                condition: service_healthy  # Ensure health check passes
 
     backend-rest:
+        container_name: "spring_backend_dev"
         volumes:
             - ./backend:/app.
+        build:
+            context: ./backend
+        env_file:
+            - ".env"
+        environment:
+            # Variables to configure MySQL connection
+            - "SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/${MYSQL_DATABASE}"
+            - "SPRING_DATASOURCE_USERNAME=root"
+            - "SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+        ports: # Expose API to host's port 8080
+            - "8080:8080"
+        expose: # Expose port 8080 to other services
+            - "8080"
+        healthcheck:
+            # Exit code 0 shows that the container is healthy and depends_on can proceed
+            test: "curl -f http://localhost:8080/api/health/ping || exit 1"
+            interval: 1m
+            retries: 3
+            start_period: 20s
+            start_interval: 5s
+        depends_on:
+            database:
+                condition: service_healthy
+        networks:
+            - network
+
+    database:
+        container_name: "mysql_database_dev"
+        image: "mysql:latest"
+        env_file:
+            - ".env"
+        ports:
+            - "3306:3306"
+        healthcheck:
+            test: "mysqladmin ping -h localhost || exit 1"
+            interval: 1m
+            retries: 5
+            start_period: 10s
+            start_interval: 500ms
+        networks:
+            - network
+
+networks:
+    network:
