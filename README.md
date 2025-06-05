@@ -55,7 +55,7 @@ compiling them into one cohesive location with each article one click away.
    react_nginx:/etc/nginx/conf.d/default.conf && rm default.conf`.
    4. Restart the nginx container with `docker compose restart frontend`.
 10. Enjoy!
-11. Use `docker compose stop` and `docker-compose start` to stop and start the server
+11. Use `docker-compose stop` and `docker-compose start` to stop and start the server
     respectively.
 
 ---
