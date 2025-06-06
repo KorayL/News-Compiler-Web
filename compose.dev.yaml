@@ -68,6 +68,8 @@ services:
     database:
         container_name: "mysql_database_dev"
         image: "mysql:latest"
+        volumes:
+            - ./database_data:/var/lib/mysql  # Persist MySQL data
         env_file:
             - ".env"
         ports:
