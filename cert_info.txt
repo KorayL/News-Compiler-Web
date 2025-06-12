@@ -1,0 +1,22 @@
+# This file contains information for generating a self-signed SSL certificate.
+# Replace the '.' entries with your actual information if you would like
+# The following instructions are from the OpenSSL command line tool:
+#
+# For some fields there will be a default value,
+# If you enter '.', the field will be left blank.
+#
+# Please fill in the following information:
+# Country Name (2 letter code) [AU]
+.
+# State or Province Name (full name) [Some-State]
+North-Carolina
+# Locality Name (eg, city)
+.
+# Organization Name (eg, company) [Internet Widgits Pty Ltd]
+.
+# Organizational Unit Name (eg, section)
+.
+# Common Name (e.g. server FQDN or YOUR name)
+.
+# Email Address
+.
