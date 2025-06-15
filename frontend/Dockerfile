@@ -28,7 +28,7 @@ COPY --from=build /app/dist /app
 
 # Install dependancies for creating certbot certificates
 RUN apt update && apt install -y python3-pip python3-certbot-nginx vim nano
-RUN pip3 install --upgrade certbot --break-system-packages
+RUN pip3 install certbot==4.1.1 --break-system-packages
 
 # Copy the Nginx configuration file
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
