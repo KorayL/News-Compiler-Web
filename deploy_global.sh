@@ -1,3 +1,6 @@
+# Load environment variables from .env file
+source .env
+
 # Create a local certificate so certbot can use it
 chmod +x get_certificate.sh
 ./get_certificate.sh > /dev/null 2>&1
@@ -23,13 +26,28 @@ else
   echo "Docker Compose started successfully..."
 fi
 
-# Create the public certifications
-docker exec react_nginx bash -c "certbot --nginx -d \$DOMAIN -d www.\$DOMAIN --non-interactive --agree-tos --email \$EMAIL --test-cert"
+# Create public certifications if they do not exist
+if find ./frontend/certificates/certbot/live/${DOMAIN} -name "*.pem" | grep . > /dev/null 2>&1; then
+  echo "Found existing public certificates..."
+  echo "Updating nginx configuration to use existing certificates..."
 
-docker ps
+  # Update nginx configuration to use the new certificates
+  docker exec react_nginx sed -i "/selfsigned/ s/    /    # /" /etc/nginx/conf.d/default.conf  # Comment out self-signed certificate lines
+  docker exec react_nginx sed -i "/letsencrypt/ s/# //" /etc/nginx/conf.d/default.conf  # Uncomment Let's Encrypt certificate lines
+else
+  echo "No public certificates found, creating new ones..."
 
-# Update nginx configuration to use the new certificates
-docker exec react_nginx sed -i "/selfsigned/ s/    /    # /" /etc/nginx/conf.d/default.conf  # Comment out self-signed certificate lines
-docker exec react_nginx sed -i "/letsencrypt/ s/# //" /etc/nginx/conf.d/default.conf  # Uncomment Let's Encrypt certificate lines
+  # Create the public certifications
+  docker exec react_nginx bash -c "certbot --nginx -d \$DOMAIN -d www.\$DOMAIN --non-interactive --agree-tos --email \$EMAIL --test-cert"
+
+  # Ensure the command was successful
+  if [[ $? -ne 0 ]]; then
+    echo "Certbot failed to create public certificates..."
+    echo "Exiting."
+    exit 1
+  else
+    echo "Public certificates created successfully..."
+  fi
+fi
 
 docker compose restart frontend
