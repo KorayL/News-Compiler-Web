@@ -1,6 +1,8 @@
 # Load environment variables from .env file
 . .env
 
+sudo chwon --recursive ${USER} *
+
 # Create a local certificate so certbot can use it
 chmod +x get_certificate.sh
 ./get_certificate.sh > /dev/null 2>&1
