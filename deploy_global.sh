@@ -12,7 +12,7 @@ else
 fi
 
 # Start Docker Compose
-docker-compose up -d --build
+docker compose up -d --build
 
 # Check if Docker Compose started successfully
 if [[ $? -ne 0 ]]; then
@@ -24,10 +24,12 @@ else
 fi
 
 # Create the public certifications
-docker exec react_nginx certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email ${EMAIL}
+docker exec react_nginx certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email ${EMAIL} ---test-cert
+
+docker ps
 
 # Update nginx configuration to use the new certificates
-sed -i "/selfsigned/ s/    /    # /" /etc/nginx/conf.d/default.conf  # Comment out self-signed certificate lines
-sed -i "/letsencrypt/ s/# //" /etc/nginx/conf.d/default.conf  # Uncomment Let's Encrypt certificate lines
+docker exec react_nginx sed -i "/selfsigned/ s/    /    # /" /etc/nginx/conf.d/default.conf  # Comment out self-signed certificate lines
+docker exec react_nginx sed -i "/letsencrypt/ s/# //" /etc/nginx/conf.d/default.conf  # Uncomment Let's Encrypt certificate lines
 
-docker-compose restart frontend
+docker compose restart frontend

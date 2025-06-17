@@ -10,6 +10,8 @@ compiling them into one cohesive location with each article one click away.
 - The web scraper uses Python's BeautifulSoup library to scrape articles from various news sources.
 - The project is containerized entirely using Docker compose and served using Nginx.
 
+---
+
 ## Screenshots 📸
 
 ![Whole Compiler Image](assets/mosaicImage.png)
@@ -18,6 +20,17 @@ compiling them into one cohesive location with each article one click away.
 
 ![Article Image](assets/articleImage.png)
 
+---
+
+## How to Develop Locally 🛠️  
+
+1. Follow steps 1-5 from the "How to Deploy Yourself" section.
+2. Run `docker-compose -f compose.dev.yaml up` in the root directory of the project.
+3. Visit `http://localhost:5173` in your browser.
+4. Enjoy!
+5. Use `docker-compose -f compose.dev.yaml stop` and `docker-compose -f compose.dev.yaml start` to stop and start the server
+   respectively.
+6. Use `docker-compose -f compose.dev.yaml down` to stop and remove the containers, networks, and volumes.
 
 ---
 
@@ -64,5 +77,5 @@ compiling them into one cohesive location with each article one click away.
    react_nginx:/etc/nginx/conf.d/default.conf && rm default.conf`.
     4. Restart the nginx container with `docker compose restart frontend`.
 10. Enjoy!
-11. Use `docker compose stop` and `docker-compose start` to stop and start the server
+11. Use `docker-compose stop` and `docker-compose start` to stop and start the server
     respectively.
