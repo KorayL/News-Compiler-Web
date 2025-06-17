@@ -62,7 +62,9 @@ compiling them into one cohesive location with each article one click away.
 5. Enter into the container from another terminal window with `docker exec -it react_nginx sh`.
 6. Run `certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email 
    ${EMAIL}`.
-    - If you are testing, add the `--test-cert` flag to the command to avoid hitting [rate limits](https://letsencrypt.org/docs/rate-limits/#new-certificates-per-exact-set-of-hostnames).
+    - If you are [testing](https://letsencrypt.org/docs/staging-environment/), add the 
+      `--test-cert` or `--dry-run` flags to the command to avoid 
+      hitting [rate limits](https://letsencrypt.org/docs/rate-limits/#new-certificates-per-exact-set-of-identifiers).
 7. Change the nginx configuration (in `react_nginx`) in `/etc/nginx/conf.d/default.conf` to use
    the new certificates using the following two lines with `vim` or `nano`.
    The required lines are already in the file, but commented out.
