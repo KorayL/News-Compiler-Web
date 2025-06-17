@@ -27,7 +27,7 @@ else
 fi
 
 # Create public certifications if they do not exist
-if find ./frontend/certificates/certbot/live/${DOMAIN} -name "*.pem" | grep . > /dev/null 2>&1; then
+if find ./frontend/certificates/certbot/live/${DOMAIN} -name "*.pem" > /dev/null 2>&1; then
   echo "Found existing public certificates..."
   echo "Updating nginx configuration to use existing certificates..."
 
