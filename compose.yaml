@@ -4,7 +4,8 @@ services:  # Define services/containers to spin up
     frontend:
         container_name: react_nginx
         volumes:
-            - ./frontend/certificates:/app/certificates  # Mount certificates
+            - ./frontend/certificates/openssl:/app/certificates  # Mount certificates
+            - ./frontend/certificates/certbot:/etc/letsencrypt # For certbot
         build: # Specifies build configuration
             context: ./frontend  # Location of Dockerfile
             args: # Arguments to pass to the build

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REST_API_BASE_URL = "http://localhost:8080/api/articles";
+const REST_API_BASE_URL = "/api/articles";
 
 /**
  * Retrieves articles fetched within the last 24-hours.

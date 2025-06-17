@@ -1,5 +1,5 @@
-mkdir -p frontend/certificates
-cd frontend/certificates || exit
+mkdir -p frontend/certificates/openssl
+cd frontend/certificates/openssl || exit
 
 # Generate a self-signed certificate
 grep -v "#" ../../cert_info.txt | \
