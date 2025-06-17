@@ -24,7 +24,7 @@ else
 fi
 
 # Create the public certifications
-docker exec react_nginx certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email ${EMAIL} ---test-cert
+docker exec react_nginx certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email ${EMAIL} --test-cert
 
 docker ps
 
