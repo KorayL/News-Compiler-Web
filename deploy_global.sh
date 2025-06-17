@@ -1,6 +1,8 @@
 # Load environment variables from .env file
 . .env
 
+docker compose down
+
 sudo chown --recursive ${USER} *
 
 # Create a local certificate so certbot can use it
