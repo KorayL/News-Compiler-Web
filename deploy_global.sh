@@ -3,7 +3,7 @@
 
 docker compose down
 
-sudo chown --recursive ${USER} *
+# sudo chown --recursive ${USER} *
 
 # Create a local certificate so certbot can use it
 chmod +x get_certificate.sh
@@ -42,7 +42,7 @@ else
   echo "No public certificates found, creating new ones..."
 
   # Create the public certifications
-  docker exec react_nginx bash -c "certbot --nginx -d \$DOMAIN -d www.\$DOMAIN --non-interactive --agree-tos --email \$EMAIL --test-cert"
+  docker exec react_nginx bash -c "certbot --nginx -d \$DOMAIN -d www.\$DOMAIN --non-interactive --agree-tos --email \$EMAIL"
 
   # Ensure the command was successful
   if [[ $? -ne 0 ]]; then
