@@ -45,7 +45,7 @@ compiling them into one cohesive location with each article one click away.
 5. Read the instructions to fill in the `.env` file with your own values.`
 6. Make a copy of the `cert_info.txt.template` file and rename it to `cert_info.txt`:
    ```
-   `cp cert_info.template cert_info.txt`
+   `cp cert_info.txt.template cert_info.txt`
    ```
 7. Read the instructions to fill in the `cert_info.txt` file with your own values.
    - This file will be used to generate a certificate for your domain.
