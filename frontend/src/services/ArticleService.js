@@ -19,10 +19,8 @@ const REST_API_BASE_URL = `${import.meta.env.VITE_API_URL}/articles`;
  *     title: String,
  * }[], status: Number}>>}
  */
-export const getRecentArticles = () => {
-    console.log(`Fetching recent articles from ${REST_API_BASE_URL}/recent`);
-    return axios.get(`${REST_API_BASE_URL}/recent`);
-}
+export const getRecentArticles = () => axios.get(
+    `${REST_API_BASE_URL}/recent`);
 
 /**
  * Retrieves an article by its ID.
