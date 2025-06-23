@@ -1,3 +1,5 @@
+# Rename this file to cert_info.txt and fill in the details below:
+#
 # This file contains information for generating a self-signed SSL certificate.
 # Replace the '.' entries with your actual information if you would like
 # The following instructions are from the OpenSSL command line tool:
