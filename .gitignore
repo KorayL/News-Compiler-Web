@@ -1,7 +1,7 @@
 # Ignore database files
 database_data/
 
-# Ignore certification information
+# Ignore private certification information
 cert_info.txt
 
 # Created by .ignore support plugin (hsz.mobi)
