@@ -4,7 +4,7 @@ on:
     push:
         branches:
             - main
-            - auto-deploy
+            - dev
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
           ssh -p ${SSH_PORT} -i ./deploy.key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_PATH} \
             "cd ~/News-Compiler-Web && \
             git stash && \
-            git checkout auto-deploy && \
+            git checkout dev
             git pull && \
             ./deploy_global.sh"
         env:
