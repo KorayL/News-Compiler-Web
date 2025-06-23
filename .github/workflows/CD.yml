@@ -16,7 +16,7 @@ jobs:
           ssh -p ${SSH_PORT} -i ./deploy.key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_PATH} \
             "cd ~/News-Compiler-Web && \
             git stash && \
-            git checkout main && \
+            git checkout auto-deploy && \
             git pull && \
             ./deploy_global.sh"
         env:
