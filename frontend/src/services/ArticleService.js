@@ -25,7 +25,7 @@ export const getRecentArticles = () => axios.get(
 /**
  * Retrieves an article by its ID.
  * @param {BigInt} id - The ID of the article to retrieve.
- * @returns {{data: {
+ * @returns {Promise<axios.AxiosResponse<{data: {
  *     articleUrl: String,
  *     body: String,
  *     category: String,
@@ -35,7 +35,7 @@ export const getRecentArticles = () => axios.get(
  *     timeFetched: String,
  *     timePublished: String,
  *     title: String,
- * }, status: Number}}
+ * }, status: Number}>>}
  */
 export const getArticleById = (id) => axios.get(
     `${REST_API_BASE_URL}/${id}`);
