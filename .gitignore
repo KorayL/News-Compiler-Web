@@ -1,6 +1,9 @@
 # Ignore database files
 database_data/
 
+# Ignore certification information
+cert_info.txt
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
