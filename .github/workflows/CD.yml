@@ -1,0 +1,21 @@
+name: CD Pipeline
+run-name: Deploying to server 🚀
+on:
+    push:
+        branches:
+            - main
+            - auto-deploy
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to server, pull, and deploy
+        run: |
+          echo "$SSH_KEY" > ./deploy.key
+          chmod 600 ./deploy.key
+          ssh -p ${SSH_PORT} -i ./deploy.key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_PATH} "cd ~/News-Compiler-Web && git checkout main && git pull && ./deploy_global.sh"
+        env:
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PATH: ${{ secrets.SSH_PATH }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
