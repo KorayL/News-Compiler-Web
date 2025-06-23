@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REST_API_BASE_URL = "/api/articles";
+const REST_API_BASE_URL = `${import.meta.env.VITE_API_URL}/articles`;
 
 /**
  * Retrieves articles fetched within the last 24-hours.
@@ -25,7 +25,7 @@ export const getRecentArticles = () => axios.get(
 /**
  * Retrieves an article by its ID.
  * @param {BigInt} id - The ID of the article to retrieve.
- * @returns {{data: {
+ * @returns {Promise<axios.AxiosResponse<{data: {
  *     articleUrl: String,
  *     body: String,
  *     category: String,
@@ -35,7 +35,7 @@ export const getRecentArticles = () => axios.get(
  *     timeFetched: String,
  *     timePublished: String,
  *     title: String,
- * }, status: Number}}
+ * }, status: Number}>>}
  */
 export const getArticleById = (id) => axios.get(
     `${REST_API_BASE_URL}/${id}`);

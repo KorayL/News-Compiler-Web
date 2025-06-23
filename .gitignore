@@ -1,6 +1,9 @@
 # Ignore database files
 database_data/
 
+# Ignore private certification information
+cert_info.txt
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
@@ -182,9 +185,6 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-
-# idea folder, uncomment if you don't need it
- .idea
 
 ########### IntelliJ
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
