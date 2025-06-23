@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: SSH to server, pull, and deploy
         run: |
+          echo "Starting Workflow: `date`"
           echo "$SSH_KEY" > ./deploy.key
           chmod 600 ./deploy.key
           ssh -p ${SSH_PORT} -i ./deploy.key -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_PATH} \
