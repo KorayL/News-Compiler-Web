@@ -41,7 +41,7 @@ if find ./frontend/certificates/certbot/live/${DOMAIN} -name "*.pem" > /dev/null
 else
   echo "No public certificates found, creating new ones..."
 
-  # Create the public certifications
+  # Create the public certificates
   docker exec react_nginx bash -c "certbot --nginx -d \$DOMAIN -d www.\$DOMAIN --non-interactive --agree-tos --email \$EMAIL"
 
   # Ensure the command was successful
