@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REST_API_BASE_URL = "/api/articles";
+const REST_API_BASE_URL = `${import.meta.env.VITE_API_URL}/articles`;
 
 /**
  * Retrieves articles fetched within the last 24-hours.
@@ -19,8 +19,10 @@ const REST_API_BASE_URL = "/api/articles";
  *     title: String,
  * }[], status: Number}>>}
  */
-export const getRecentArticles = () => axios.get(
-    `${REST_API_BASE_URL}/recent`);
+export const getRecentArticles = () => {
+    console.log(`Fetching recent articles from ${REST_API_BASE_URL}/recent`);
+    return axios.get(`${REST_API_BASE_URL}/recent`);
+}
 
 /**
  * Retrieves an article by its ID.

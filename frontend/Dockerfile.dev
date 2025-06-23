@@ -4,6 +4,9 @@ FROM node:18 AS build
 # Set a default value for FRONTEND_INTERNAL_PORT
 ARG FRONTEND_INTERNAL_PORT=5173
 
+# URL for making REST API calls
+ENV VITE_API_URL=http://localhost:8080/api
+
 # Set the working directory in the container
 WORKDIR /app
 
