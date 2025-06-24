@@ -17,7 +17,8 @@ public abstract class BaseTest {
 
     /* Starts the MySQL container before any tests are run as a 'singleton'. */
     static {
-        mySQLContainer = new MySQLContainer<>("mysql:latest")
+        // TODO: Update the MySQL version when TestContainers supports it
+        mySQLContainer = new MySQLContainer<>("mysql:8.0")
                 .withDatabaseName("my_test_db")
                 .withUsername("my_user")
                 .withPassword("my_password");
