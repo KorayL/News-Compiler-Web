@@ -222,4 +222,25 @@ class ArticleReaderControllerTest extends BaseTest {
         mockMVC.perform(get("/api/articles/1000"))
                 .andExpect(status().isNotFound());  // Ensure that the request was unsuccessful
     }
+
+    /**
+     * Tests that the <code>getRecentArticlesLite</code> endpoint functions as intended.
+     * This test will not check many of the contents of the articles or the edge cases around
+     * fetching articles, as those are already covered by other tests.
+     * This test will only check that the body of the articles is null to reduce payload size.
+     * @throws Exception if the test fails or if there is an issue with the GET request
+     */
+    @Test
+    @Transactional
+    void getRecentArticlesLite() throws Exception {
+        // Ensure that the controller returns the correct articles
+        mockMVC.perform(get("/api/articles/recent/lite"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(testArticles.get(0).getTitle())))
+                .andExpect(content().string(containsString(testArticles.get(2).getTitle())))
+                .andExpect(content().string(containsString(testArticles.get(1).getTitle())))
+                .andExpect(content().string(not(containsString(testArticles.get(0).getBody()))))
+                .andExpect(content().string(not(containsString(testArticles.get(2).getBody()))))
+                .andExpect(content().string(not(containsString(testArticles.get(1).getBody()))));
+    }
 }
