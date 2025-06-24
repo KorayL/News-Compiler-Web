@@ -20,7 +20,7 @@ const REST_API_BASE_URL = `${import.meta.env.VITE_API_URL}/articles`;
  * }[], status: Number}>>}
  */
 export const getRecentArticles = () => axios.get(
-    `${REST_API_BASE_URL}/recent`);
+    `${REST_API_BASE_URL}/recent/lite`);
 
 /**
  * Retrieves an article by its ID.
