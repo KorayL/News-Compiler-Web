@@ -80,6 +80,21 @@ public class ArticleService {
     }
 
     /**
+     * Returns a lightweight version of the articles fetched in the last 24 hours.
+     * These articles do not contain the body of the article, to reduce payload size.
+     *
+     * @return a list of the most recently fetched articles with a null body.
+     */
+    public List<ArticleDto> getRecentlyFetchedLite() {
+        List<ArticleDto> articles = getRecentlyFetched();
+
+        // Set the body to null to reduce payload size
+        articles.forEach(article -> article.setBody(null));
+
+        return articles;
+    }
+
+    /**
      * Writes articles to the database.
      *
      * @param articles the articles to write

@@ -37,6 +37,16 @@ public class ArticleReaderController {
     }
 
     /**
+     * Returns a lightweight version of the articles fetched in the last 24 hours.
+     * These articles do not contain the body of the article, to reduce payload size.
+     * @return a list of the most recently fetched articles with a null body.
+     */
+    @GetMapping("/recent/lite")
+    public List<ArticleDto> getRecentArticlesLite() {
+        return articleService.getRecentlyFetchedLite();
+    }
+
+    /**
      * Returns an article by its ID.
      * @param id the ID of the article to fetch
      * @return the article with the given ID
