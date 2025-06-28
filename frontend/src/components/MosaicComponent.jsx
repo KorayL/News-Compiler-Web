@@ -14,8 +14,6 @@ const MosaicComponent = () => {
     /** Number of columns to display */
     const [numCols, setNumCols] = useState(1)
 
-    const [refresh , setRefresh] = useState(false)
-
     /** Error message to be displayed if the articles cannot be fetched */
     const [error, setError] = useState("")
 
@@ -86,7 +84,7 @@ const MosaicComponent = () => {
             setError("Error fetching articles.")
             console.error(error)
         })
-    }, [refresh])
+    }, [])
 
     // Updates the columns in which articles are displayed
     useEffect(() => {
@@ -127,10 +125,7 @@ const MosaicComponent = () => {
     return (
         <main className="mosaicBody">
             {/*Top Menu*/}
-            <div id="menu"
-                 onClick={() => setRefresh(!refresh)}
-                 title="Click to reload articles">
-
+            <div id="menu">
                 <h1>Koray&#39;s News Compiler</h1>
             </div>
 
