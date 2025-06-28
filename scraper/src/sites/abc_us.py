@@ -30,7 +30,11 @@ class abc_us(Site):
         stories: list[bs4.element] = html.findAll(class_="ContentRoll__Item", limit=20)
 
         for story in stories:
-            links.append(story.find("a", class_="AnchorLink")["href"])
+            link: str = story.find("a", class_="AnchorLink")["href"]
+
+            if "/video/" not in link:  # Exclude video links
+                links.append(link)
+
         return links
 
     def get_title(self, html: BeautifulSoup) -> str:
@@ -38,15 +42,18 @@ class abc_us(Site):
 
     def get_date(self, html: BeautifulSoup) -> datetime | None:
         try:
-            date: str = html.find("div", class_="jTKbV zIIsP ZdbeE xAPpq QtiLO JQYD ").get_text()
+            date: str = (html.find("div",
+                                   class_=re.compile("jTKbV zIIsP ZdbeE xAPpq QtiLO JQYD"))
+                         .get_text())
         except (AttributeError, ValueError):
             return None
 
-        return parser.parse(date)
+        return parser.parse(date).astimezone()
 
     def get_image_url(self, html: BeautifulSoup) -> str | None:
         try:
-            body = html.find(lambda tag: tag.has_attr("data-testid") and tag["data-testid"] == "prism-article-body")
+            body = html.find(lambda tag: tag.has_attr("data-testid") and tag[
+                "data-testid"] == "prism-article-body")
             image_tag = body.find(class_=re.compile("InlineImage"))
             image_url = image_tag.find("img")["src"]
             return image_url

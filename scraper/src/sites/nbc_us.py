@@ -53,6 +53,10 @@ class nbc_us(Site):
             if date[-1] == " ":
                 date = date[:-1]
 
+            # Some dates start with "Updated", remove it
+            if date.startswith("Updated"):
+                date = date.replace("Updated", "").strip()
+
         except (AttributeError, ValueError):
             return None
 
