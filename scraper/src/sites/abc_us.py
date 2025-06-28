@@ -30,7 +30,11 @@ class abc_us(Site):
         stories: list[bs4.element] = html.findAll(class_="ContentRoll__Item", limit=20)
 
         for story in stories:
-            links.append(story.find("a", class_="AnchorLink")["href"])
+            link: str = story.find("a", class_="AnchorLink")["href"]
+
+            if "/video/" not in link:  # Exclude video links
+                links.append(story.find("a", class_="AnchorLink")["href"])
+
         return links
 
     def get_title(self, html: BeautifulSoup) -> str:
