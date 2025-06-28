@@ -33,7 +33,7 @@ class abc_us(Site):
             link: str = story.find("a", class_="AnchorLink")["href"]
 
             if "/video/" not in link:  # Exclude video links
-                links.append(story.find("a", class_="AnchorLink")["href"])
+                links.append(link)
 
         return links
 
