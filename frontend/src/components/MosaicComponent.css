@@ -30,7 +30,7 @@ main {
     justify-content: center;
     align-items: center;
 
-    cursor: grab;
+    cursor: default;
 }
 
 .mosaicBody {
