@@ -73,8 +73,8 @@ const ArticleComponent = () => {
 
             <br/>
             <hr/>  {/* Horizontal line */}
-            <br/>
-
+            <br/>sdfsd
+sdfsdf
             {/* Body tags will go here */}
             {createBodyTags(article.body)}
         </div>
