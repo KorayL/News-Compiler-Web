@@ -1,9 +1,9 @@
 import './App.css'
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
-import MosaicComponent from './components/MosaicComponent.jsx'
-import ArticleComponent from "./components/ArticleComponent.jsx";
-import { MosaicDataProvider } from './components/MosaicData.jsx';
+import MosaicPage from './pages/mosaic/MosaicPage.jsx'
+import ArticlePage from "./pages/article/ArticlePage.jsx";
+import {MosaicDataProvider} from './pages/mosaic/componets/MosaicData.jsx';
 
 function App() {
     return (
@@ -11,8 +11,8 @@ function App() {
             <MosaicDataProvider>
                 <Routes>
                     <Route path="/" element={<Navigate to="/home" />} />
-                    <Route path="/home" element={<MosaicComponent/>} />
-                    <Route path="/article/:articleId" element={<ArticleComponent/>} />
+                    <Route path="/home" element={<MosaicPage/>} />
+                    <Route path="/article/:articleId" element={<ArticlePage/>} />
                     <Route path="*" element={<h1>Not Found</h1>} />
                 </Routes>
             </MosaicDataProvider>

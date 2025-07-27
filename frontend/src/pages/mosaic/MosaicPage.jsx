@@ -1,11 +1,11 @@
-import "./MosaicComponent.css"
+import "./MosaicPage.css"
 
 import {useEffect, useLayoutEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {useMosaicData} from "./MosaicData.jsx";
+import {useMosaicData} from "./componets/MosaicData.jsx";
 import {BeatLoader} from "react-spinners";
+import ArticleTile from "./componets/ArticleTile.jsx";
 
-const MosaicComponent = () => {
+const MosaicPage = () => {
     // Use the mosaic data context
     const {articles, loading, error} = useMosaicData();
     
@@ -16,9 +16,6 @@ const MosaicComponent = () => {
 
     /** Number of columns to display */
     const [numCols, setNumCols] = useState(1)
-
-    /** Navigation hook to navigate to different pages */
-    const navigate = useNavigate()
 
     /**
      * Creates an HTML element for the general error message or loading indicator.
@@ -46,15 +43,6 @@ const MosaicComponent = () => {
     }
 
     /**
-     * Opens an article by its ID.
-     * @param articleId - The ID of the article to open.
-     */
-    function openArticle(articleId) {
-        console.log("Opening article with ID: " + articleId)
-        navigate(`/article/${articleId}`)
-    }
-
-    /**
      * Calculates, based on the width of the window, the number of columns the website should use to
      * make masonry grid layout.
      * @returns {number} The number of columns to be used.
@@ -72,24 +60,19 @@ const MosaicComponent = () => {
     // Process articles from context when they change
     useEffect(() => {
         if (articles && articles.length > 0) {
-            // Convert article data to HTML
-            let htmls = []
+            // Create tiles from articles
+            let tiles = []
             articles.forEach((article) => {
-                htmls.push(
-                    // Construct an article div
-                    <div className="article" key={article.id}
-                         onClick={() => openArticle(article.id)}>
-
-                        <h4 className="tileTitle" id={article.title}>{article.title}</h4>
-                        {/*Only include the image if it exists*/}
-                        {article.imageUrl && <img src={article.imageUrl} alt={article.title}></img>}
-
-                        {/*Show where the article was scraped from*/}
-                        <p> {article.source} </p>
-                    </div>
+                tiles.push(
+                    <ArticleTile
+                        id={article.id}
+                        title={article.title}
+                        imageUrl={article.imageUrl}
+                        source={article.source}
+                    />
                 )
             })
-            setArticleHTMLs(htmls)
+            setArticleHTMLs(tiles)
         }
     }, [articles])
 
@@ -153,4 +136,4 @@ const MosaicComponent = () => {
     )
 }
 
-export default MosaicComponent
+export default MosaicPage
