@@ -10,12 +10,6 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} The rendered article tile component.
  */
 const ArticleTile = ({id, title, imageUrl, source}) => {
-    ArticleTile.propTypes = {
-        id: PropTypes.oneOfType([PropTypes.number]).isRequired,
-        title: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string,
-        source: PropTypes.string.isRequired,
-    };
 
     /** Navigation hook to navigate to different pages */
     const navigate = useNavigate()
