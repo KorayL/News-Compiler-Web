@@ -1,10 +1,10 @@
-import "./ArticleComponent.css"
+import "./ArticlePage.css"
 
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {getArticleById} from "../services/ArticleService.js";
+import {getArticleById} from "../../services/ArticleService.js";
 
-const ArticleComponent = () => {
+const ArticlePage = () => {
     /** The article to be displayed */
     const [article, setArticle] = useState({})
     /** The ID of the article to be displayed */
@@ -81,4 +81,4 @@ const ArticleComponent = () => {
     );
 }
 
-export default ArticleComponent;
+export default ArticlePage;
