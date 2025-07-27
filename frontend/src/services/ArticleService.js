@@ -7,9 +7,8 @@ const REST_API_BASE_URL = `${import.meta.env.VITE_API_URL}/articles`;
  * Articles will be ordered by the time at which they were published or edited. If the article's
  * publish/edit time is not available, it will be placed at the end of the list.
  * @returns {Promise<axios.AxiosResponse<
- * {data: {
+ * {
  *     articleUrl: String,
- *     body: String,
  *     category: String,
  *     id: BigInt,
  *     imageUrl: String,
@@ -17,7 +16,7 @@ const REST_API_BASE_URL = `${import.meta.env.VITE_API_URL}/articles`;
  *     timeFetched: String,
  *     timePublished: String,
  *     title: String,
- * }[], status: Number}>>}
+ * }[], status: Number>>}
  */
 export const getRecentArticles = () => axios.get(
     `${REST_API_BASE_URL}/recent/lite`);
@@ -25,7 +24,7 @@ export const getRecentArticles = () => axios.get(
 /**
  * Retrieves an article by its ID.
  * @param {BigInt} id - The ID of the article to retrieve.
- * @returns {Promise<axios.AxiosResponse<{data: {
+ * @returns {Promise<axios.AxiosResponse<{
  *     articleUrl: String,
  *     body: String,
  *     category: String,
@@ -35,7 +34,7 @@ export const getRecentArticles = () => axios.get(
  *     timeFetched: String,
  *     timePublished: String,
  *     title: String,
- * }, status: Number}>>}
+ * }, status: Number>>}
  */
 export const getArticleById = (id) => axios.get(
     `${REST_API_BASE_URL}/${id}`);
