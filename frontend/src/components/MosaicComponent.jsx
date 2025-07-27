@@ -1,11 +1,14 @@
 import "./MosaicComponent.css"
 
 import {useEffect, useLayoutEffect, useState} from "react";
-
-import {getRecentArticles} from "../services/ArticleService.js";
 import {useNavigate} from "react-router-dom";
+import {useMosaicData} from "./MosaicData.jsx";
+import {BeatLoader} from "react-spinners";
 
 const MosaicComponent = () => {
+    // Use the mosaic data context
+    const {articles, loading, error} = useMosaicData();
+    
     /** Article HTMLs to be placed into columns sorted by order to place onto the page */
     const [articleHTMLs, setArticleHTMLs] = useState([])
     /** An array of columns into which articles will be placed. */
@@ -14,24 +17,32 @@ const MosaicComponent = () => {
     /** Number of columns to display */
     const [numCols, setNumCols] = useState(1)
 
-    /** Error message to be displayed if the articles cannot be fetched */
-    const [error, setError] = useState("")
-
     /** Navigation hook to navigate to different pages */
     const navigate = useNavigate()
 
     /**
-     * Creates an HTML element for the general error message.
+     * Creates an HTML element for the general error message or loading indicator.
      * @return {JSX.Element} The HTML element to be displayed.
      */
-    function getGeneralErrors() {
-        if (error) {
+    function getStatusMessage() {
+        if (loading) {
+            // Create a fun loading indicator
+            return (
+                <center>
+                    <br/>
+                    <BeatLoader color="#ffffff">
+                    </BeatLoader>
+                </center>
+            );
+        } else if (error) {
+            // Create an error message if there was an error fetching articles
             return (
                 <div className="errorBox">
                     <h1>{error}</h1>
                 </div>
-            )
+            );
         }
+        return null;
     }
 
     /**
@@ -58,13 +69,12 @@ const MosaicComponent = () => {
         }
     }
 
-    // Get articles from the backend on render
+    // Process articles from context when they change
     useEffect(() => {
-        // Fetch articles on render
-        getRecentArticles().then((response) => {
+        if (articles && articles.length > 0) {
             // Convert article data to HTML
             let htmls = []
-            response.data.forEach((article) => {
+            articles.forEach((article) => {
                 htmls.push(
                     // Construct an article div
                     <div className="article" key={article.id}
@@ -72,7 +82,7 @@ const MosaicComponent = () => {
 
                         <h4 className="tileTitle" id={article.title}>{article.title}</h4>
                         {/*Only include the image if it exists*/}
-                        {article.imageUrl && <img src={article.imageUrl}></img>}
+                        {article.imageUrl && <img src={article.imageUrl} alt={article.title}></img>}
 
                         {/*Show where the article was scraped from*/}
                         <p> {article.source} </p>
@@ -80,11 +90,8 @@ const MosaicComponent = () => {
                 )
             })
             setArticleHTMLs(htmls)
-        }).catch((error) => {  // Catch any errors fetching
-            setError("Error fetching articles.")
-            console.error(error)
-        })
-    }, [])
+        }
+    }, [articles])
 
     // Updates the columns in which articles are displayed
     useEffect(() => {
@@ -129,7 +136,7 @@ const MosaicComponent = () => {
                 <h1>Koray&#39;s News Compiler</h1>
             </div>
 
-            {getGeneralErrors()}
+            {getStatusMessage()}
 
             <div className="articles">
                 {
