@@ -5,6 +5,7 @@ import bs4
 from bs4 import BeautifulSoup
 from dateutil import parser
 
+from src.Categories import Category
 from src.Site import Site
 
 
@@ -36,7 +37,7 @@ class template(Site):
         self.source = ""
 
     def set_category(self) -> None:
-        self.category = ""
+        self.category = Category.OTHER
 
     def get_article_urls(self, html: BeautifulSoup) -> list[str]:
         pass
@@ -45,7 +46,6 @@ class template(Site):
         pass
 
     def get_date(self, html: BeautifulSoup) -> datetime | None:
-        pass
         try:
             # Get the date from the website
             date: str = ""
@@ -60,8 +60,6 @@ class template(Site):
             pass
         except (TypeError, AttributeError):
             return None
-
-        pass
 
     def get_body(self, html: BeautifulSoup) -> list[str]:
         pass
