@@ -14,17 +14,15 @@ from src.sites import *
 def instantiate(class_: type) -> object:
     """
     Used when multiprocessing to instantiate a class.
-    <p>
-    @param class_: The class to instantiate.
-    @return: The instantiated class.
+    :param class_: The class to instantiate.
+    :return: The instantiated class.
     """
     return class_()
 
 def get_sites() -> list[Site]:
     """
     Gets all subclasses of Site and instantiates them.
-    <p>
-    @return: The list of instantiated sites.
+    :return: The list of instantiated sites.
     """
 
     print("loading sites...")
@@ -39,10 +37,9 @@ def _write_to_file(articles) -> None:
     """
     Writes articles to a file. The format of the articles does not matter as it will be written
     to a JSON file. The only requirement is that it must be serializable.
-    <p>
+
     The intention is to use this function for debugging and testing.
-    <p>
-    @param articles: The articles to write.
+    :param articles: The articles to write.
     """
 
     print("writing articles to file")
