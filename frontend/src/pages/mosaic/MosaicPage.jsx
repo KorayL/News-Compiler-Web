@@ -1,9 +1,9 @@
 import "./MosaicPage.css"
 
 import {useEffect, useLayoutEffect, useState} from "react";
-import {useMosaicData} from "./componets/MosaicData.jsx";
+import {useMosaicData} from "./components/MosaicData.jsx";
 import {BeatLoader} from "react-spinners";
-import ArticleTile from "./componets/ArticleTile.jsx";
+import ArticleTile from "./components/ArticleTile.jsx";
 
 const MosaicPage = () => {
     // Use the mosaic data context
