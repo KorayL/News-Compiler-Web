@@ -3,7 +3,7 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
 import MosaicPage from './pages/mosaic/MosaicPage.jsx'
 import ArticlePage from "./pages/article/ArticlePage.jsx";
-import {MosaicDataProvider} from './pages/mosaic/componets/MosaicData.jsx';
+import {MosaicDataProvider} from './pages/mosaic/components/MosaicData.jsx';
 
 function App() {
     return (
