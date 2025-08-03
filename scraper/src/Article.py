@@ -11,15 +11,15 @@ class Article:
         """
         Initializes an article.
         The time of construction will also be stored as the time fetched.
-        <p>
-        @param url:
-        @param title: The title of the article.
-        @param image_url: URL to the image obtained from the scraped website.
-        @param body: Body of the article.
-        @param source: Where the article came from.
-        @param category: What is this article about?
-        @param date: The date associated with the article from the scraped site. Can be None if
-        no date found.
+        
+        :param url:
+        :param title: The title of the article.
+        :param image_url: URL to the image obtained from the scraped website.
+        :param body: Body of the article.
+        :param source: Where the article came from.
+        :param category: What is this article about?
+        :param date: The date associated with the article from the scraped site. It can be ``None``
+            if no date is found.
         """
 
         self.url: str = url
@@ -45,8 +45,8 @@ class Article:
         """
         Stores all article data in a dictionary.
         This dictionary matches the RESTful API's expected format.
-        <p>
-        @return: dictionary with all article data.
+
+        :return: Dictionary with all article data.
         """
 
         if self.dict is None:
@@ -66,11 +66,11 @@ class Article:
     def __str__(self) -> str:
         """
         Generates a string representation of the article.
-        <p>
+
         The String representation is formatted as a JSON where each field is a key and the value
         is the corresponding value of the field.
-        <p>
-        @return: The string representation of the article.
+
+        :return: The string representation of the article.
         """
 
         return dumps(self.to_dict(), indent=4)
