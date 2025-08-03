@@ -1,7 +1,6 @@
 import re
 from datetime import datetime
 
-import bs4
 from bs4 import BeautifulSoup
 from dateutil import parser
 
