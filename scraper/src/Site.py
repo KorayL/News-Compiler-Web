@@ -99,8 +99,12 @@ class Site(ABC):
         return article_dict
 
     @staticmethod
-    def get_html(url) -> BeautifulSoup:
-        """ Gets the BeautifulSoup HTML of this website from its URL. """
+    def get_html(url: str) -> BeautifulSoup:
+        """
+        Gets the BeautifulSoup HTML of this website from its URL.
+        :param url: The URL of the news website.
+        :return: BeautifulSoup object from the HTML of the news website.
+        """
 
         return BeautifulSoup(requests.get(url).text, 'html.parser')
 
@@ -188,7 +192,7 @@ class Site(ABC):
         without an image.
 
         :param html: BeautifulSoup object of the article HTML of the article.
-        :return: URL to the image that represents the article or ``None`` with the article does not
+        :return: URL to the image that represents the article or ``None`` when the article does not
             have an image.
         """
         pass
