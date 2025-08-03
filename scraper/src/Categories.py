@@ -3,7 +3,7 @@ from enum import Enum
 class Category(Enum):
     """
     An enumeration of categories supported by the application.
-    Values of the
+    The values of the enum represent different news categories used for classification.
     """
 
     UNITED_STATES_POLITICS = "UNITED_STATES_POLITICS"
