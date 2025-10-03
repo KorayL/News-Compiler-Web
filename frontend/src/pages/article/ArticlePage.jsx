@@ -3,6 +3,7 @@ import "./ArticlePage.css"
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getArticleById} from "../../services/ArticleService.js";
+import BackButton from "./components/BackButton.jsx"
 
 const ArticlePage = () => {
     /** The article to be displayed */
@@ -77,6 +78,9 @@ const ArticlePage = () => {
 
             {/* Body tags will go here */}
             {createBodyTags(article.body)}
+
+            <BackButton></BackButton>
+
         </div>
     );
 }
