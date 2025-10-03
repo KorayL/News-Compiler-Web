@@ -3,10 +3,9 @@ const BackButton = () => {
     if (isMobile) return null;
 
     return (
-        <a
+        <button
             onClick={() => window.history.back()}
 
-            className="btn btn-primary"
             style={{
                 position: "fixed",
                 left: "24px",
@@ -17,9 +16,10 @@ const BackButton = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                outline: "none",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
                 fontSize: "20px",
-                cursor: "grab",
+                cursor: "pointer",
                 color: "#fff",
                 fontWeight: "bold",
                 backgroundColor: "#4d4d4d"
@@ -27,7 +27,7 @@ const BackButton = () => {
             aria-label="Back to Articles"
         >
             &#8592;
-        </a>
+        </button>
     )
 }
 

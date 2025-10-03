@@ -79,11 +79,7 @@ const ArticlePage = () => {
             {/* Body tags will go here */}
             {createBodyTags(article.body)}
 
-            <center>
-                <BackButton>
-
-                </BackButton>
-            </center>
+            <BackButton></BackButton>
 
         </div>
     );
