@@ -1,4 +1,4 @@
-# News Compiler 📰
+# [News Compiler 📰](https://koraylatif.com)
 
 ## About 📚
 
